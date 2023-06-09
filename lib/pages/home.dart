@@ -34,6 +34,12 @@ class _HomeState extends State<Home> {
           }
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.pushNamed(context, '/add');
+        },
+        child: const Icon(Icons.add),
+        ),
     );
   }
 }

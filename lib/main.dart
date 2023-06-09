@@ -1,7 +1,10 @@
-import 'package:crud/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+
+//Pages
+import 'package:crud/pages/add_name_page.dart';
+import 'package:crud/pages/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +21,8 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       initialRoute: '/',
       routes: {
-        '/': ((context) => Home()),
+        '/': (context) => Home(),
+        '/add':(context) => AddNamePage()
       },
     );
   }
