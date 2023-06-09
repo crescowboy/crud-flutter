@@ -39,17 +39,18 @@ class _HomeState extends State<Home> {
         future: getPeople(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final people = snapshot.data!;
             return ListView.builder(
-              itemCount: people.length,
+              itemCount: snapshot.data?.length,
               itemBuilder: (context, index) {
-                return Text(people[index]['name']);
+                return Text(snapshot.data?[index]['name']);
               },
             );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            return const CircularProgressIndicator();
+            return const Center(
+              child: CircularProgressIndicator(),
+            ); 
           }
         },
       ),
