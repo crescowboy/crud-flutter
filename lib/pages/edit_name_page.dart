@@ -14,6 +14,11 @@ class _EditNamePageState extends State<EditNamePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+
+    nameController.text = arguments["name"];
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Name'),
