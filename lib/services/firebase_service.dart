@@ -4,13 +4,19 @@ FirebaseFirestore db = FirebaseFirestore.instance;
 
 Future<List> getPeople() async{
   List people = [];
-  CollectionReference collectionReferencePeople = db.collection('people');
+  
 
-  QuerySnapshot queryPeople = await collectionReferencePeople.get();
+  QuerySnapshot querySnapshot = await db.collection('people').get();
 
-  queryPeople.docs.forEach((documento) {
-    people.add(documento.data());
-   });
+  for (var doc in querySnapshot.docs) {
+    final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    final person = {
+      "name": data["name"],
+      "uid": doc.id,
+    };
+
+    people.add(person);
+   }
 
   return people;
 }

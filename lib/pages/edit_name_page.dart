@@ -36,9 +36,11 @@ class _EditNamePageState extends State<EditNamePage> {
               ),
               ElevatedButton(
                 onPressed: () async{
-                  await addPeople(nameController.text).then((_) {
+                  await updatePeople(arguments["uid"], nameController.text)
+                  .then((_) {
                     Navigator.pop(context);
                   });
+                
                  
               },
               child: const Text('Actualizar'))
