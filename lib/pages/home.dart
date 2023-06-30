@@ -22,15 +22,51 @@ class _HomeState extends State<Home> {
             return ListView.builder(
               itemCount: snapshot.data?.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(snapshot.data?[index]['name']),
-                  onTap: (() async{
-                    await Navigator.pushNamed(context, "/edit", arguments: {
-                      "name": snapshot.data?[index]["name"],
-                      "uid": snapshot.data?[index]["uid"],
-                    });
-                    setState(() {});
-                  }),
+                return Dismissible(
+                  confirmDismiss: (direction) async{
+                    bool result = false;
+                    result = await showDialog(
+                      context: context,
+                      builder: (context){
+                        return AlertDialog(
+                          title: Text("Estas seguro de eliminar a ${snapshot.data?[index]["name"]}"),
+                          actions: [
+                            TextButton(onPressed: (){
+                              return Navigator.pop(
+                                context,
+                                false,
+                                );
+                            }, child: const Text("Cancelar",
+                              style: TextStyle(color: Colors.red),
+                            )),
+
+                            TextButton(onPressed: (){
+                              return Navigator.pop(
+                                context,
+                                true,
+                                );
+                            }, child: Text("Si"))
+                          ],
+                        );
+                      });
+                    return result;
+                  },
+                  background: Container(
+                    child: const Icon(Icons.delete),
+                    color: Colors.red,
+                  ),
+                  direction: DismissDirection.startToEnd,
+                  key: Key(snapshot.data?[index]["uid"]),
+                  child: ListTile(
+                    title: Text(snapshot.data?[index]['name']),
+                    onTap: (() async{
+                      await Navigator.pushNamed(context, "/edit", arguments: {
+                        "name": snapshot.data?[index]["name"],
+                        "uid": snapshot.data?[index]["uid"],
+                      });
+                      setState(() {});
+                    }),
+                  ),
                 );
               },
             );
