@@ -34,3 +34,8 @@ Future<void> updatePeople(String uid, String newName) async{
 
 }
 
+//Borrar datos de firebase
+Future<void> deletePeople(String uid) async{
+  await db.collection("people").doc(uid).delete();
+}
+

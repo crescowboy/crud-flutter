@@ -23,6 +23,9 @@ class _HomeState extends State<Home> {
               itemCount: snapshot.data?.length,
               itemBuilder: (context, index) {
                 return Dismissible(
+                  onDismissed: (direction){
+                    
+                  },
                   confirmDismiss: (direction) async{
                     bool result = false;
                     result = await showDialog(
